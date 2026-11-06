@@ -1,24 +1,32 @@
 import React, { useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { COLORS } from '../utils/colors';
+import Slideshow from '../components/Slideshow';
 
 export default function SplashScreen({ navigation }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.replace('MenuList');
     }, 3000);
-    
+
     return () => clearTimeout(timer);
   }, [navigation]);
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.logo}>🍽️</Text>
+        <Slideshow size={90} interval={500} />
+
         <Text style={styles.title}>Christoffel's</Text>
         <Text style={styles.subtitle}>Restaurant</Text>
         <Text style={styles.tagline}>Menu Manager</Text>
-        <ActivityIndicator size="large" color={COLORS.primary} style={styles.spinner} />
+
+        <ActivityIndicator
+          size="large"
+          color={COLORS.primary}
+          style={styles.spinner}
+        />
+        <Text style={styles.loadingText}>Preparing your menu...</Text>
       </View>
       <Text style={styles.version}>Version 1.0</Text>
     </View>
@@ -37,15 +45,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  logo: {
-    fontSize: 72,
-    marginBottom: 16,
-  },
   title: {
     fontSize: 36,
     fontWeight: '800',
     color: COLORS.primary,
     letterSpacing: 1,
+    marginTop: 16,
   },
   subtitle: {
     fontSize: 20,
@@ -63,6 +68,12 @@ const styles = StyleSheet.create({
   },
   spinner: {
     marginTop: 32,
+  },
+  loadingText: {
+    fontSize: 12,
+    color: COLORS.textLight,
+    marginTop: 8,
+    fontStyle: 'italic',
   },
   version: {
     fontSize: 12,
