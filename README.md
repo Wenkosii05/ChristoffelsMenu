@@ -1,36 +1,69 @@
 README.md
 
-```
-🍽️ Christoffel's Menu Manager
+# 🍽️ Christoffel's Menu Manager
 
-A mobile application built with React Native to help restaurant owner Christoffel manage his menu digitally, replacing his paper-based system.
+A mobile application built with React Native to help restaurant owner Christoffel manage his menu digitally, replacing his paper-based system. The app features full CRUD functionality, advanced search and filtering, dynamic statistics, and a user-friendly experience.
 
+---
 
-📱 About The App
+## 📱 About The App
 
-Christoffel's Menu Manager is a simple, user-friendly mobile application that allows a chef/restaurant owner to:
-Add new dishes to the menu
-View all menu items in an organized list
-View detailed information about each dish
-Delete dishes from the menu
+Christoffel's Menu Manager is a comprehensive mobile application that allows a chef/restaurant owner to:
+- **Add** new dishes to the menu
+- **View** all menu items in an organized list
+- **View detailed information** and **Statistics** about the menu
+- **Edit/Update** existing dishes
+- **Delete** dishes from the menu
+- **Search and filter** to find dishes instantly
 
-The app was designed with a busy kitchen environment in mind—large touch targets, readable text, and simple navigation.
+The app was designed with a busy kitchen environment in mind—large touch targets, readable text, clear error validation, and simple navigation.
 
+---
 
-🛠️ Technologies Used
+## 🛠️ Technologies Used
 
-Technology & Purpose 
-React Native - Mobile app framework
-Expo - Development platform 
-React Navigation - Screen navigation 
-AsyncStorage - Persistent data storage 
-React Native Picker - Dropdown selection for courses
+| Technology | Purpose |
+|------------|---------|
+| **React Native & Expo** | Mobile app framework and development platform |
+| **React Navigation** | Screen navigation and routing |
+| **AsyncStorage** | Persistent local data storage |
+| **React Native Picker** | Dropdown selection for courses |
+| **Animated API** | Emoji slideshow animation on launch |
 
+---
 
-📂 Project Structure
+## ✨ Key Features Implemented
 
-```
+### 1. User Experience & Interface
+- **Animated Splash Screen:** Features a dynamic slideshow of food and drink emojis while the app loads.
+- **Consistent Layout:** Global styles and centralized color themes ensure a unified look across all screens.
+- **Reusable Components:** Created modular components (`CustomButton`, `CustomInput`, `SearchBar`, `FilterChips`, `StatsBanner`, `MenuCard`) to reduce code duplication.
+- **Reusable Functions:** Centralized validation logic (`validateDishForm`) and formatters (`formatPrice`, `formatDate`) for clean code organization.
 
+### 2. Manage Menu Items (CRUD)
+- **Create:** Add dishes with Name, Description, Course, Price, and an "Available" toggle.
+- **Read:** View all items in a clean, scannable list, or tap to view full details.
+- **Update:** Edit any existing dish with pre-filled forms and update it instantly.
+- **Delete:** Safely remove items with an "Are you sure?" confirmation prompt.
+
+### 3. Search & Filter
+- **Search by Name:** Real-time search bar with a "Clear" button.
+- **Filter by Course:** Quick-filter chips (Starters, Mains, Desserts, Beverages).
+- **Combined Filtering:** Search and course filters can be used simultaneously.
+- **Clear All:** A single button to reset the search and filters back to the full menu.
+
+### 4. Menu Statistics
+- **Live Stats Banner:** Always displays the total number of items and average price on the main screen.
+- **Dedicated Stats Screen:** Accessible via the header icon, showing:
+  - Total menu value.
+  - Number of unavailable items.
+  - Visual progress bars showing the quantity of items available in each course.
+
+---
+
+## 📂 Project Structure
+
+```text
 ChristoffelsMenu/
 ├── App.js                    # Entry point of the app
 ├── src/
@@ -38,23 +71,26 @@ ChristoffelsMenu/
 │   │   ├── CustomButton.js
 │   │   ├── CustomInput.js
 │   │   ├── EmptyState.js
+│   │   ├── FilterChips.js
 │   │   ├── Header.js
-│   │   └── MenuCard.js
+│   │   ├── MenuCard.js
+│   │   ├── SearchBar.js
+│   │   ├── Slideshow.js
+│   │   └── StatsBanner.js
 │   ├── screens/              # App screens
 │   │   ├── SplashScreen.js
 │   │   ├── MenuListScreen.js
 │   │   ├── AddDishScreen.js
-│   │   └── DishDetailsScreen.js
+│   │   ├── EditDishScreen.js
+│   │   ├── DishDetailsScreen.js
+│   │   └── StatsScreen.js
 │   ├── navigation/           # Navigation setup
 │   │   └── AppNavigator.js
 │   └── utils/                # Utilities and helpers
-│       ├── colors.js         # Theme colors
+│       ├── colors.js         # Theme colors and constants
 │       ├── styles.js         # Global styles
-│       └── storage.js        # AsyncStorage operations
-└── package.json              # Dependencies
-
-```
-
+│       ├── storage.js        # AsyncStorage & statistics logic
+│       └── validators.js     # Reusable validation & format functions
 
 📱 Screens Overview
 
@@ -102,7 +138,7 @@ Step 4: Run on Device
 
 📱 App Features
 
-1️⃣ Add a New Dish
+1 Add a New Dish
 
 · Enter Dish Name (required)
 · Enter Description (required)
@@ -111,28 +147,39 @@ Step 4: Run on Device
 · Validation errors appear for empty or invalid fields
 · Success message confirms when a dish is added
 
-2️⃣ View All Menu Items
+2 View All Menu Items
 
 · All dishes are displayed in a scrollable list
 · Each item shows: Name, Course, Price
 · Tapping a dish opens the details screen
 
-3️⃣ View Dish Details
+3 View Dish Details
 
 · Full dish name, course, and price
 · Complete description
 · Date the dish was added
 
-4️⃣ Delete a Dish
+4 Delete a Dish
 
 · Tap the "Delete Dish" button on the details screen
 · Confirmation modal prevents accidental deletion
 · Dish is permanently removed
 
-5️⃣ Persistent Storage
+5 Persistent Storage
 
 · All dishes are saved using AsyncStorage
 · Data persists even after closing the app
+
+6 Edit a dish
+- Can now edit a dish to add other ingredients and update price
+- can now set a dish to be available or not, depending on the cuurent state of the kitchen.
+
+7 View analytics 
+- Can view all the dishes in one dashboad
+- can view the avarage price and total price of the whole menu
+
+8 Search and filter 
+- Can now search and filter the dishes and see only the category needed. 
 
 
 🎨 Design Decisions
@@ -181,7 +228,7 @@ This application demonstrates the application of key mobile development principl
 3. Data Persistence - AsyncStorage provides reliable offline storage
 4. Error Handling - Validation and error messages prevent data corruption
 
-The development process reinforced the importance of thorough planning (Part 1) before implementation (Part 2), and the value of user experience improvements (Part 3).
+
 
 🧑‍🎓 Student Information
 
@@ -189,8 +236,8 @@ Detail Information
 Student Name- Musawenkosi Victor Mnanzana
 Student Number ST10500929
 Module- Mobile App Scripting
-Project Part 2 - Christoffel's Menu Manager
-Date September 2026
+Project Part 3 - Christoffel's Menu Manager
+Date November 2026
 
 
 © 2026 - Christoffel's Menu Manager
