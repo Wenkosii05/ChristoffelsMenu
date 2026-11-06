@@ -15,7 +15,7 @@ import { getMenuItems } from '../utils/storage';
 import Header from '../components/Header';
 import MenuCard from '../components/MenuCard';
 import EmptyState from '../components/EmptyState';
-import SearchBar from '../components/Searchbar';
+import SearchBar from '../components/SearchBar';
 import FilterChips from '../components/FilterChips';
 import StatsBanner from '../components/StatsBanner';
 
@@ -102,11 +102,11 @@ export default function MenuListScreen({ navigation }) {
         }
       />
 
-      <StatsBanner
+       <StatsBanner
         totalItems={stats.totalItems}
         averagePrice={stats.averagePrice}
         onPress={handleStatsPress}
-      />
+      /> 
 
       <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
 
